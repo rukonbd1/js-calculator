@@ -2,25 +2,50 @@ const screen1= document.getElementById('screen1');
 const screen2= document.getElementById('screen2');
 const signs= document.getElementsByClassName('sign');
 const operators = document.getElementsByClassName('operator');
-const actions= document.getElementsByClassName("action")
-console.log(actions)
+const actions= document.getElementsByClassName("action");
+const getNumber=(sign,index,text)=>{
+  for (let i = 0; i < index.length; i++) {
+    const element = index[i];
+    console.log(element)
+    
+  }
+}
+
+const getOperator=(arr)=>{
+  let newArr=[]
+  let indexArr=[]
+  for (let i = 0; i < arr.length; i++) {
+    if(arr[i]=="+" || arr[i]=="−" || arr[i]=="×" || arr[i]=="÷"){
+      newArr.push(arr[i]);
+      indexArr.push(i);
+    }  
+  }
+  return {newArr,indexArr};
+}
+const calculation=(value)=>{
+  let array=[];
+  for (let i = 0; i < value.length; i++) {
+    const element = value.charAt(i);
+    array.push(element) 
+  }
+  console.log(getOperator(array))
+  
+}
 
 let text="";
 
 for (let i = 0; i < signs.length; i++) {
   let sign = signs[i];
   sign.addEventListener('click',(e)=>{ 
-    t=e.target.innerText;
+    let t=e.target.innerText;
     text=text+t;
-    console.log(text.charAt(text.length-1));
-      if(text.charAt(text.length-1)=="+"|| text.charAt(text.length-1)=="−"||text.charAt(text.length-1)=="×" || text.charAt(text.length-1)=="÷"){
-        console.log(text.charAt(text.length-1))
-        if(text.charAt(text.length-2)=="+"|| text.charAt(text.length-2)=="−"||text.charAt(text.length-2)=="×" || text.charAt(text.length-2)=="÷"){
-          console.log(text.charAt(text.length-2))
-          text=text.slice(0,-1)
-        }
+    const last= text.charAt(text.length-1);
+    const prev= text.charAt(text.length-2)
+    if(last=="+"|| text.charAt(text.length-1)=="−"||last=="×" || last=="÷"){
+      if(prev=="+"|| prev=="−"||prev=="×" || prev=="÷"){
+        text=text.slice(0,-1);  
       }
-    console.log(text); 
+    }
     screen2.innerText=text;
   })  
 }
@@ -49,7 +74,11 @@ for (let i = 0; i < actions.length; i++) {
         
       }
       if(txt=="="){
-        console.log("calculation")
+        let operator=getOperator(text);
+        let sign=operator.newArr;
+        let indexArr= operator.indexArr;
+        getNumber(sign,indexArr,text);
+
       }
     
   })  
