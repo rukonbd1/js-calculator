@@ -1,0 +1,55 @@
+*,:root{
+    margin: 0%;
+    padding: 0%;
+    background-color: rgb(36, 36, 36);
+}
+
+.main{
+    min-width: 380px;
+    max-width: 650px;
+    margin: auto;
+}
+
+#screen{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border:2px solid white;
+    border-radius: 5px;
+    width: 70%;
+}
+#screen1,#screen2{
+    color: aliceblue;
+    text-align: right;
+}
+#screen2{
+    font-size: 2rem;
+}
+#screen1{
+    font-size: 1.5rem;
+}
+
+.buttons{
+    padding-top: 10px;
+    width: 70%;
+    margin: auto;
+    display: grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-gap: 10px;
+    color: white;
+}
+.btn{
+    font-size: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 5px;
+    outline-color: rgba(0, 0, 0, 0);
+    border: 2px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+.btn:active{
+    border: 2px solid white;
+}
