@@ -3,6 +3,31 @@ const screen2= document.getElementById('screen2');
 const signs= document.getElementsByClassName('sign');
 const operators = document.getElementsByClassName('operator');
 const actions= document.getElementsByClassName("action");
+const square = document.getElementsByClassName("square")[0];
+const factorial = document.getElementsByClassName("factorial")[0];
+
+//square
+square.addEventListener('click',()=>{
+  const input= screen2.innerText;
+  const num=parseFloat(input)
+  const sqr =num*num;
+  screen1.innerText=num;
+  screen2.innerText=sqr;
+})
+// factorial by recursion
+factorial.addEventListener('click',()=>{
+  const input= screen2.innerText;
+  const num=parseInt(input)
+  const fact=(n)=>{
+    if(n>0){
+      return n*fact(n-1);
+    }
+    else return 1;
+  }
+  fact(num);
+  screen1.innerText=num;
+  screen2.innerText=fact(num);
+})
 
 //calculation of two numbers
 const calculation=(x,y,sign)=>{
@@ -152,7 +177,9 @@ for (let i = 0; i < actions.length; i++) {
           } 
         }
         else{
-          return
+          screen1.innerText="0";
+          screen2.innerText="0";
+          text='';
         }
       }   
   })  
