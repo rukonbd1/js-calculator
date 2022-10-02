@@ -31,16 +31,9 @@ factorial.addEventListener('click',()=>{
 
 //calculation of two numbers
 const calculation=(x,y,sign)=>{
-  const isInt=(a)=>{
-    if(a.includes('.')){
-      return parseFloat(a);
-    }
-    else{
-      return parseInt(a);
-    }
-  }
-  const num1=isInt(x)
-  const num2=isInt(y)
+
+  const num1=parseFloat(x)
+  const num2=parseFloat(y)
   if(sign=="+"){
     return num1+num2;
   }
@@ -164,6 +157,7 @@ for (let i = 0; i < actions.length; i++) {
         let sign=operator.newArr;
         let numbers = getNumber(indexArr,text);
         let result= operations(sign,numbers);
+        console.log(result)
         if ((result)){
           if((text)){
             screen1.innerText=text;
