@@ -51,28 +51,67 @@ const calculation=(x,y,sign)=>{
   }
 }
 
+//remove sign from an array
+const removeSign=(signs,i)=>{
+      if (i > -1) {
+        signs.splice(i, 1);
+      }
+  return signs;
+}
+const removeNum=(nums,i)=>{
+      if (i > -1) {
+        signs.splice(i, 1);
+      }
+  return nums;
+}
+
 //operation on sign and numbers
 
-const operations=(signs,numbers)=>{
-  if(signs.length==0){
-    return screen2.innerText;
-  }
-  else if(numbers.length==2){
-    return calculation(numbers[0],numbers[1],signs[0]);
-  }
-  else if(numbers.length>2){
-    let result='';
-    for (let i = 0; i < numbers.length-1; i++) {
-      if(i==0){
-        result=calculation(numbers[0],numbers[1],signs[0])
+const operations=(sign,number)=>{
+  let newSign =sign;
+  let newNumber = number;
+    if((newSign.includes("÷"))){
+      let i = newSign.indexOf("÷");
+      let dvalue=calculation(newNumber[i],newNumber[i+1],newSign[i]);
+      newNumber.splice(i,2,dvalue.toString())
+      newSign.splice(i,1)
+      if(newNumber.length>1){
+        operations(newSign,newNumber);
       }
-      else{
-        result =calculation(result,numbers[i+1],signs[i])
-      }     
     }
-    return result;
-  }
+    else if(newSign.includes("×")){
+      let i = newSign.indexOf("×");
+      let sValue=calculation(newNumber[i],newNumber[i+1],newSign[i]);
+      newNumber.splice(i,2,sValue.toString())
+      newSign.splice(i,1)
+      if(newNumber.length>1){
+        operations(newSign,newNumber);
+      }  
+    }
+    else if(newSign.includes("−")){
+      let i = newSign.indexOf("−");
+      let sValue=calculation(newNumber[i],newNumber[i+1],newSign[i]);
+      newNumber.splice(i,2,sValue.toString())
+      newSign.splice(i,1)
+      if(newNumber.length>1){
+        operations(newSign,newNumber);
+      }  
+    }
+    else if(newSign.includes("+")){
+      let i = newSign.indexOf("+");
+      let sValue=calculation(newNumber[i],newNumber[i+1],newSign[i]);
+      newNumber.splice(i,2,sValue.toString())
+      newSign.splice(i,1)
+      if(newNumber.length>1){
+        operations(newSign,newNumber);
+      }  
+    }
+    
+    return newNumber[0];
 }
+
+  
+  
 //get number from screen
 
 const getNumber=(index,text)=>{
@@ -155,9 +194,9 @@ for (let i = 0; i < actions.length; i++) {
         let operator=getOperator(text);
         let indexArr= operator.indexArr;
         let sign=operator.newArr;
-        let numbers = getNumber(indexArr,text);
-        let result= operations(sign,numbers);
-        if ((result)){
+        let number= getNumber(indexArr,text);
+        let result = operations(sign,number);
+         if (result!==NaN) {
           if((text)){
             screen1.innerText=text;
             screen2.innerText=result;
